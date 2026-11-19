@@ -17,8 +17,8 @@
 
 % The book chapter is the source of this text (content/growth/RamseyCassKoopmans/index.md in
 % intertemporal-choice.github.io). Make edits there first and carry them here; check-book-sync.py
-% reports any differences. The numerical appendix, behind the NumericalSolution switch, follows the
-% chapter's "Appendix: Numerical Solution" until the appendix is split off.
+% reports any differences. The numerical appendix is split off: the time-elimination method now lives in
+% the notebook (RamseyCassKoopmans.ipynb, the book's copy), as in the chapter.
 % A good follow-up handout (or exam question) would look at the augmented model in \cite{ghosDespiteUzawa}
 \begin{document}
 \handoutHeader
@@ -29,10 +29,6 @@
 
 \handoutNameMake
 
-\newboolean{NumericalSolution}
-\setboolean{NumericalSolution}{true}
-% \setboolean{NumericalSolution}{false}
-
 
 \citet{ramseySave}, followed much later by \citet{cass:growth} and \citet{koopmans:growth}, formulated the canonical model of optimal growth, presented here for an economy with exogenous ``labor-augmenting'' technological progress. For the facts the model is meant to explain, and the Solow model it builds on, see the undergraduate textbook of \citet{ashrafWeilGrowth}.\marginFootnote{Graduate textbook treatments are in \citet{blanchard&fischer:text}, chapter 2, \citet{barro&salaimartin:book}, chapter 2, and \citet{acemogluGrowth}, chapter 8.}
 
@@ -42,7 +38,7 @@ The economy has a perfectly competitive production sector that uses a constant-r
 \begin{equation}\begin{gathered}\begin{aligned}
                    \YLvl & =  \FFunc(\KLvl,\PtyLab \LLvl) = \KLvl^{\kapShare}(\PtyLab \LLvl)^{1-\kapShare}
 \end{aligned}\end{gathered}\end{equation}
-to produce output using capital and labor.  Under perfect competition firms must make zero profits in equilibrium, which means, by \href{https://intertemporal-choice.github.io/content/appendices/mathematical/mathfactslist/\#fact-eulerstheorem}{Euler's theorem}, that\marginFootnote{An important insight here is that all of output is absorbed by payments to labor and to capital; there is nothing left over (say, to fund corporate research to invent new technologies to augment productivity).}
+to produce output using capital and labor.  Under perfect competition firms must make zero profits in equilibrium, which means, by \href{https://intertemporal-choice.github.io/content/appendices/mathematical/mathfactslist/\#fact-eulerstheorem}{Euler's theorem}, that\marginFootnote{An important insight here is that all of output is absorbed by payments to labor and to capital; there is nothing left over (say, to fund corporate research to invent new technologies to augment productivity). \href{https://intertemporal-choice.github.io/content/growth/endogenous/}{What Endogenous Growth Requires} starts from this point.}
 \begin{equation}
   \YLvl = \FFunc_{\KLvl}\KLvl + \FFunc_{\LLvl}\LLvl , \qquad \FFunc_{\KLvl} \equiv \partial\YLvl/\partial\KLvl , \quad \FFunc_{\LLvl} \equiv \partial\YLvl/\partial\LLvl . \label{eq:RCK-outputExhausted}
 \end{equation}
@@ -126,12 +122,12 @@ subject to
 \begin{equation}
   \dot{\kNrm} = \kNrm^{\kapShare}-\cNrm-(\PopnGroRte+\PtyGroRte+\deprRte)\kNrm,
 \end{equation}
-whose current-value Hamiltonian is\marginFootnote{If the Hamiltonian is new to you, Peter Thompson's \href{https://www.andrew.cmu.edu/course/88-737/optimal_control/optimal_control.pdf}{lecture notes on optimal control} derive the method from the economics of a firm's capital problem, and later work through this model. Wikipedia's \href{https://en.wikipedia.org/wiki/Hamiltonian_(control_theory)\#Example:_Ramsey\%E2\%80\%93Cass\%E2\%80\%93Koopmans_model}{worked example of the RCK model}, linked from the two optimization conditions, uses the present-value Hamiltonian instead, whose costate is this one discounted to date zero.}
+whose current-value Hamiltonian is\marginFootnote{If the Hamiltonian is new to you, Peter Thompson's \href{https://www.andrew.cmu.edu/course/88-737/optimal_control/optimal_control.pdf}{lecture notes on optimal control} derive the method from the economics of a firm's capital problem, and later work through this model. Wikipedia's \href{https://en.wikipedia.org/wiki/Hamiltonian_(control_theory)\#Example:_Ramsey\%E2\%80\%93Cass\%E2\%80\%93Koopmans_model}{worked example of the RCK model} uses the present-value Hamiltonian instead, whose costate is this one discounted to date zero.}
 \begin{equation}
   \Ham(\kNrm,\cNrm,\vk) = \uFunc(\cNrm) + (\kNrm^{\kapShare} - \cNrm - (\PopnGroRte+\PtyGroRte+\deprRte)\kNrm)\vk.
 \end{equation}
 
-The \href{https://en.wikipedia.org/wiki/Hamiltonian_(control_theory)#Example:_Ramsey\%E2\%80\%93Cass\%E2\%80\%93Koopmans_model}{current-value Hamiltonian optimization condition} for consumption requires $\partial
+The \href{https://intertemporal-choice.github.io/content/appendices/mathematical/hamiltonianvsdiscrete/\#eq-uceqvk}{current-value Hamiltonian optimization condition} for consumption requires $\partial
 \Ham/\partial \cNrm = 0$:
 \begin{equation}\begin{gathered}\begin{aligned}
   \cNrm^{-\CRRA} & =  \vk  \label{eq:RCK-H1A} \\
@@ -139,7 +135,7 @@ The \href{https://en.wikipedia.org/wiki/Hamiltonian_(control_theory)#Example:_Ra
                                        .
 \end{aligned}\end{gathered}\end{equation}
 
-The \href{https://en.wikipedia.org/wiki/Hamiltonian_(control_theory)#Example:_Ramsey\%E2\%80\%93Cass\%E2\%80\%93Koopmans_model}{current-value Hamiltonian optimization condition} for capital, the costate equation, requires:\marginFootnote{In the book's mathematical appendices, \href{https://intertemporal-choice.github.io/content/appendices/mathematical/hamiltonianvsdiscrete/}{Ramsey Growth in Discrete and Continuous Time} derives the Hamiltonian's conditions for a version of this model without productivity growth and shows how each relates to the discrete-time Bellman approach.}
+The \href{https://intertemporal-choice.github.io/content/appendices/mathematical/hamiltonianvsdiscrete/\#eq-lamgrow}{current-value Hamiltonian optimization condition} for capital, the costate equation, requires:\marginFootnote{In the book's mathematical appendices, \href{https://intertemporal-choice.github.io/content/appendices/mathematical/hamiltonianvsdiscrete/}{Ramsey Growth in Discrete and Continuous Time} derives the Hamiltonian's conditions for a version of this model without productivity growth and shows how each relates to the discrete-time Bellman approach.}
 \begin{equation}\begin{gathered}\begin{aligned}
   \dot{\vk} & =  (\discRte-(1-\CRRA)\PtyGroRte)\vk - \partial \Ham/\partial \kNrm  \\
                 & =  (\discRte-(1-\CRRA)\PtyGroRte)\vk - \vk (\fFunc^{\prime}(\kNrm) - (\PopnGroRte+\PtyGroRte+\deprRte))  \\
@@ -215,44 +211,13 @@ Figure~\ref{fig:RamseySaddlePlot} shows three paths for $\cNrm$ and $\kNrm$ that
   \small Note: The same economy, with $\PtyGroRte=0.03$. From $\kNrm=0.5$, consumption 10 percent above the saddle path runs the capital stock down to zero, and consumption 10 percent below it accumulates capital past the golden rule, marked by the dotted line. Drawn by the \href{\Notebook}{notebook}; run it in your browser with nothing to install, in \href{\BookNotebookLite}{JupyterLite}, or open it in \href{\NotebookColab}{Colab} or \href{\NotebookBinder}{Binder}.
 \end{figure}
 
+The saddle path has, in general, no analytical solution, so the transition must be computed. The \href{\Notebook}{notebook} computes it by the ``time elimination'' method \citep{Mulligan&sm:transdynam}: along the path, $d\cNrm/d\kNrm = \dot{\cNrm}/\dot{\kNrm}$, a differential equation in $\kNrm$ alone, which it solves outward from the steady state, starting along the saddle path's slope there. The notebook derives the method and draws both figures; run it in your browser with nothing to install, in \href{\BookNotebookLite}{JupyterLite}, or open it in \href{\NotebookColab}{Colab} or \href{\NotebookBinder}{Binder}. \citet{judd:book} covers numerical methods for saddle paths more generally.
+
 How much of observed growth can the transition explain? Little, \citet{king&rebelo:trans} argue: with plausible parameters, an economy far enough below its steady state for the transition to account for much of its growth would have implausibly high interest rates early on.
 
 \href{https://intertemporal-choice.github.io/content/growth/decentralizingrck/}{Decentralizing the Ramsey/Cass-Koopmans Model} shows that, under special conditions, competitive households and firms, taking prices as given, reproduce the planner's allocation, and \href{https://intertemporal-choice.github.io/content/growth/rckwithgov/}{The Ramsey/Cass-Koopmans (RCK) Model with Government} adds government spending, taxes and debt.
 
 \bibliographystyle{econark}
 \bibliography{\bibfilesfound}
-
-% For some reason the attempt to compile the code below creates an unrecoverable error in dvi mode
-\ifdvi
-\setboolean{NumericalSolution}{false}
-\fi
-
-\ifthenelse{\boolean{NumericalSolution}}{
-  \pagebreak\centerline{\bf \Large Appendix: Numerical Solution} \medskip\medskip
-
-  Since the transition has, in general, no analytical solution, its quantitative implications must be computed. This appendix shows how, for students beginning research on growth models.
-
-  The most straightforward numerical method for perfect foresight
-  models of this kind is the
-  ``time elimination'' method \citep{Mulligan&sm:transdynam}. It starts from
-  \begin{equation}\begin{gathered}\begin{aligned}
-    \left(\frac{d\cNrm/dt}{d\kNrm/dt}\right) &=  d\cNrm/d\kNrm.
-  \end{aligned}\end{gathered}\end{equation}
-
-  By \eqref{eq:cdotOc},
-  \begin{equation}\begin{gathered}\begin{aligned}
-    \dot{\cNrm} & =   \CRRA^{-1}(\fFunc^{\prime}(\kNrm)-\discRte -(\PopnGroRte+\deprRte)-\CRRA \PtyGroRte)\cNrm \label{eq:cdot},
-  \end{aligned}\end{gathered}\end{equation}
-  so
-  \begin{equation}\begin{gathered}\begin{aligned}
-    d\cNrm/d\kNrm & =  \left(\frac{(\kapShare \kNrm^{\kapShare-1}-\discRte -(\PopnGroRte+\deprRte)-\CRRA \PtyGroRte)\cNrm}
-                       {\CRRA(\kNrm^{\kapShare} - \cNrm - (\PtyGroRte +\PopnGroRte+\deprRte) \kNrm)}\right)
-  \end{aligned}\end{gathered}\end{equation}
-  which is a differential equation with, in general, no analytical solution. Many numerical math packages can solve it, yielding a numerical version of the $\cFunc(\kNrm)$ function.
-
-  One problem: at the steady state both $\dot{\cNrm}$ and $\dot{\kNrm}$ are zero, so the right-hand side of this equation is $0/0$, and the solution cannot start there. It starts instead a small step $\epsilon$ away from the steady state on each side, along the saddle path's slope there, and integrates the equation outward, away from the steady state: once down toward $\kNrm=0$, yielding $\cFunc_{-}(\kNrm)$, and once up to some large value of $\kNrm$, yielding $\cFunc_{+}(\kNrm)$. The slope comes from the system linearized at the steady state: it is the direction of the eigenvector with the negative eigenvalue, the one direction from which the economy converges. Within $\epsilon$ of the steady state, the consumption function is the straight line along that slope.
-
-  \citet{judd:book} covers numerical methods for saddle paths more generally.  The \href{\Notebook}{notebook} solves the model this way and draws both figures; run it in your browser with nothing to install, in \href{\BookNotebookLite}{JupyterLite}, or open it in \href{\NotebookColab}{Colab} or \href{\NotebookBinder}{Binder}.
-}{}
 
 \end{document}

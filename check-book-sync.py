@@ -13,9 +13,9 @@ This script only reports; it changes nothing. Adapted from llorracc/PerfForesigh
     ./check-book-sync.py --book-git DIR   read the book at --ref from a local clone (git show)
     ./check-book-sync.py --book-dir DIR   read the book from a local checkout's working tree
 
-The numerical appendix is still inside both documents: the chapter's section "Appendix:
-Numerical Solution", and the handout's text behind its NumericalSolution switch. Both are
-compared, as one text with the rest.
+The numerical appendix is split off: the time-elimination method left both documents for the
+notebook, of which the handout keeps an identical copy (the split-chapter-appendix skill's
+decision 6). Each document keeps a paragraph that points to it.
 
 It compares the title, the wording (headings, equations, footnotes, figure captions),
 margin notes (the chapter's margin blocks against the handout's \\marginFootnote notes, which
@@ -54,9 +54,6 @@ CHAPTERS = ('content/growth/RamseyCassKoopmans/index.md', 'content/growth/Ramsey
 START = 'followed much later by'  # the first words of the shared text
 REGISTRY = '@resources/notation/econark-math.yml'
 LOCAL_STY = os.path.join('@local', 'RamseyCassKoopmans.sty')
-# The handout's numerical appendix, behind its NumericalSolution switch, from its heading to the switch's end.
-APPENDIX_HEAD = '\\centerline{\\bf \\Large Appendix: Numerical Solution}'
-APPENDIX_END = '\n}{}'
 
 # A course macro the chapter writes, and the registry name the handout writes for the same object.
 # Empty since book #104 (a7abe20): the chapter writes the registry's names throughout, under Chris's
@@ -78,6 +75,9 @@ CROSS_CHAPTER = {
     '#eq:PatWGroCond': 'https://intertemporal-choice.github.io/content/consumption/perfforesightcrra/#eq-patwgrocond',
     '#fact:eulerstheorem': 'https://intertemporal-choice.github.io/content/appendices/mathematical/mathfactslist/#fact-eulerstheorem',
     '#sec:HamiltonianVSDiscrete': 'https://intertemporal-choice.github.io/content/appendices/mathematical/hamiltonianvsdiscrete/',
+    '#eq:uceqvk': 'https://intertemporal-choice.github.io/content/appendices/mathematical/hamiltonianvsdiscrete/#eq-uceqvk',
+    '#eq:lamgrow': 'https://intertemporal-choice.github.io/content/appendices/mathematical/hamiltonianvsdiscrete/#eq-lamgrow',
+    '#sec:Endogenous': 'https://intertemporal-choice.github.io/content/growth/endogenous/',
     '#sec:decentralizingrck': 'https://intertemporal-choice.github.io/content/growth/decentralizingrck/',
     '#sec:RCKWithGov': 'https://intertemporal-choice.github.io/content/growth/rckwithgov/',
 }
@@ -115,7 +115,6 @@ RAW_ALLOWED = [
     (r'e(?=\s*\^)', "Euler's e"),
     (r'd(?=\s*(?:\^\{?\d\}?\s*)?(?:[A-Za-z]|\\[A-Za-z]))', 'the differential, as in dt or d^{2}c'),
     (r'\\tau(?![A-Za-z])', 'the dummy of integration in the transversality condition'),
-    (r'\\epsilon(?![A-Za-z])', 'a small perturbation, a throwaway letter (Chris, 2026-11-11: "Defined names only")'),
 ]
 
 # Letters the book's chapter still writes raw, where the handout writes the macro that prints the same
@@ -537,9 +536,8 @@ def main():
     used, raw_used = {}, {}
     compare_title(tex, md, problems)
 
-    # The handout's text: the body from START to the bibliography, then the numerical appendix.
-    hand_text, hand_margins = take_margins(between(tex, START, '\\bibliographystyle') + '\n'
-                                           + between(tex, APPENDIX_HEAD, APPENDIX_END))
+    # The handout's text: the body from START to the bibliography.
+    hand_text, hand_margins = take_margins(between(tex, START, '\\bibliographystyle'))
     book_text, book_margins = take_book_margins(book_rewrite(md[md.index(START):], used))
     matched = compare_words(handout_words(hand_text), book_words(book_text, raw_used), ACCEPTED_TEXT, problems)
     hand_notes = [handout_words(n) for n in hand_margins]
