@@ -44,7 +44,7 @@ to produce output using capital and labor.  Under perfect competition firms must
 \end{equation}
 Labor hours (the same as population) increase exogenously at a constant rate\marginFootnote{The population growth rate is written $\PopnGroRte$: $\PopnGroFac$ is the population's growth factor and $\lnat$ is the natural log, so $\PopnGroRte = \log \PopnGroFac$.}
 \begin{equation}\begin{gathered}\begin{aligned}
-  \dot{\LLvl}/\LLvl & =  \PopnGroRte
+  \dot{\LLvl}/\LLvl & =  \PopnGroRte ,
 \end{aligned}\end{gathered}\end{equation}
 and $\PtyLab$ is an index of labor productivity that grows at rate\marginFootnote{This is ``labor-augmenting'' (Harrod-neutral) productivity growth: $\PtyLab$ multiplies labor, $\FFunc(\KLvl,\PtyLab \LLvl)$.
 The alternative is productivity $\PtyAgg$ that multiplies total output, $\PtyAgg \FFunc(\KLvl,\LLvl)$ (``Hicks-neutral'').
@@ -62,7 +62,7 @@ Aggregate capital accumulates according to
   \dot{\KLvl} & =  \YLvl - \CLvl - \deprRte \KLvl \label{eq:Kdotlevel}.
 \end{aligned}\end{gathered}\end{equation}
 
-Lower case variables are the upper case version divided by efficiency units,\marginFootnote{NOT per-capita; this makes the `\hyperref[sec:RCK-SteadyState]{balanced growth}' path a steady state.} so $\yNrm = \YLvl/(\PtyLab \LLvl) = (\KLvl/(\PtyLab \LLvl))^{\kapShare} = \kNrm^{\kapShare}$. Since $\kNrm = \KLvl/(\PtyLab \LLvl)$,
+Lower case variables are the upper case version divided by efficiency units,\marginFootnote{NOT per capita; this makes the ``\hyperref[sec:RCK-SteadyState]{balanced growth}'' path a steady state.} so $\yNrm = \YLvl/(\PtyLab \LLvl) = (\KLvl/(\PtyLab \LLvl))^{\kapShare} = \kNrm^{\kapShare}$. Since $\kNrm = \KLvl/(\PtyLab \LLvl)$,
 \begin{equation}
   \dot{\kNrm}/\kNrm = \dot{\KLvl}/\KLvl - \dot{\PtyLab}/\PtyLab - \dot{\LLvl}/\LLvl = \dot{\KLvl}/\KLvl - (\PtyGroRte +\PopnGroRte),
 \end{equation}
@@ -95,7 +95,7 @@ sum of CRRA utility from per capita consumption, with time preference rate $\dis
 
 But $\CLvl/\LLvl = \PtyLab (\CLvl/(\PtyLab \LLvl))= \PtyLab \cNrm$.  Recall that for a variable growing at rate $\PtyGroRte$,
 \begin{equation}\begin{gathered}\begin{aligned}
-  \PtyLab _{t} & =  \PtyLab _{0}e^{\PtyGroRte t}
+  \PtyLab _{t} & =  \PtyLab _{0}e^{\PtyGroRte t} ,
 \end{aligned}\end{gathered}\end{equation}
 so if productivity at date 0 is $\PtyLab_{0}$, at date $t$
 \begin{equation}\begin{gathered}\begin{aligned}
@@ -183,7 +183,7 @@ does not. The usual tool for analyzing it is a \href{https://en.wikipedia.org/wi
 The first step is to find where the system's differential equations are
 zero. By \eqref{eq:RCK-kdot}, $\dot{\kNrm}=0$ implies
 \begin{equation}\begin{gathered}\begin{aligned}
-  \cNrm & =  \fFunc(\kNrm) - (\PtyGroRte +\PopnGroRte+\deprRte) \kNrm \label{eq:RCK-kdotEq0}
+  \cNrm & =  \fFunc(\kNrm) - (\PtyGroRte +\PopnGroRte+\deprRte) \kNrm , \label{eq:RCK-kdotEq0}
 \end{aligned}\end{gathered}\end{equation}
 and the $\dot{\cNrm}/\cNrm=0$ locus is the constant $\Steady{\kNrm}$ found above.
 The two loci divide the diagram into its phases, as figure~\ref{fig:RamseySSPlot} shows.
