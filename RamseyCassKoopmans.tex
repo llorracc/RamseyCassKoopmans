@@ -132,11 +132,13 @@ whose current-value Hamiltonian is\marginFootnote{If the Hamiltonian is new to y
 
 The \href{https://intertemporal-choice.github.io/content/appendices/mathematical/hamiltonianvsdiscrete/\#eq-uceqvk}{current-value Hamiltonian optimization condition} for consumption requires $\partial
 \Ham/\partial \cNrm = 0$:
-\begin{equation}\begin{gathered}\begin{aligned}
-  \cNrm^{-\CRRA} & =  \vk  \label{eq:RCK-H1A} \\
-  -\CRRA \cNrm^{-\CRRA-1}\dot{\cNrm} & =  \dot{\vk}
-                                       .
-\end{aligned}\end{gathered}\end{equation}
+\begin{equation}
+  \cNrm^{-\CRRA} = \vk , \label{eq:RCK-H1A}
+\end{equation}
+which can be differentiated with respect to time to obtain
+\begin{equation}
+  -\CRRA \cNrm^{-\CRRA-1}\dot{\cNrm} = \dot{\vk} . \label{eq:RCK-margUtilDot}
+\end{equation}
 
 The \href{https://intertemporal-choice.github.io/content/appendices/mathematical/hamiltonianvsdiscrete/\#eq-lamgrow}{current-value Hamiltonian optimization condition} for capital, the costate equation, requires:\marginFootnote{In the book's mathematical appendices, \href{https://intertemporal-choice.github.io/content/appendices/mathematical/hamiltonianvsdiscrete/}{Ramsey Growth in Discrete and Continuous Time} derives the Hamiltonian's conditions for a version of this model without productivity growth and shows how each relates to the discrete-time Bellman approach.}
 \begin{equation}\begin{gathered}\begin{aligned}
@@ -145,7 +147,7 @@ The \href{https://intertemporal-choice.github.io/content/appendices/mathematical
   \dot{\vk}/{\vk} & =  \discRte+\PopnGroRte+\deprRte+\CRRA \PtyGroRte-\fFunc^{\prime}(\kNrm) .
 \end{aligned}\end{gathered}\end{equation}
 
-Since \eqref{eq:RCK-H1A} gives $\dot{\vk}/\vk = -\CRRA\dot{\cNrm}/\cNrm$, this is
+Since \eqref{eq:RCK-H1A} and \eqref{eq:RCK-margUtilDot} give $\dot{\vk}/\vk = -\CRRA\dot{\cNrm}/\cNrm$, this is
 \begin{equation}
   \dot{\cNrm}/\cNrm = \CRRA^{-1}(\fFunc^{\prime}(\kNrm)-(\PopnGroRte+\deprRte)-\discRte - \CRRA \PtyGroRte), \label{eq:cdotOc}
 \end{equation}
@@ -168,7 +170,7 @@ $\dot{\cNrm}/\cNrm = 0$ implies that at the steady-state value of $\Steady{\kNrm
   \fFunc^{\prime}(\Steady{\kNrm}) = \discRte +\PopnGroRte+\deprRte+\CRRA \PtyGroRte . \label{eq:RCK-modGoldenRule}
 \end{equation}
 
-This is the ``modified golden rule'' of \citet{blanchard&fischer:text}, chapter 2. Comparing it with the \hyperref[eq:RCK-goldenRule]{golden rule}, $\fFunc^{\prime}(\Steady{\kNrm}) - \fFunc^{\prime}(\GoldRule{\kNrm}) = \discRte - (1-\CRRA)\PtyGroRte$, so $\Steady{\kNrm} < \GoldRule{\kNrm}$ exactly when $\discRte > (1-\CRRA)\PtyGroRte$: the assumption that keeps the planner's objective finite also rules out accumulating more capital than the golden rule.
+This is what \citet{cass:turnpike} named the ``modified golden rule.'' Comparing it with the \hyperref[eq:RCK-goldenRule]{golden rule}, $\fFunc^{\prime}(\Steady{\kNrm}) - \fFunc^{\prime}(\GoldRule{\kNrm}) = \discRte - (1-\CRRA)\PtyGroRte$, so $\Steady{\kNrm} < \GoldRule{\kNrm}$ exactly when $\discRte > (1-\CRRA)\PtyGroRte$: the assumption that keeps the planner's objective finite also rules out accumulating more capital than the golden rule.
 
 Using $\fFunc^{\prime}(\kNrm) = \kapShare \kNrm^{\kapShare-1}$, the modified golden rule gives an analytical formula for the steady state:
 \begin{equation}\begin{gathered}\begin{aligned}
