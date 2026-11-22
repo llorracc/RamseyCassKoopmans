@@ -244,7 +244,7 @@ def handout_words(t):
     t = re.sub(r'\\includegraphics(\[[^\]]*\])?\{[^}]*\}', '', t)
     t = re.sub(r'\\(begin|end)\{figure\}', '', t)
     t = re.sub(r'\\(notag|medskip|pagebreak|centering|centerline|LARGE|Large|bf|small|par)\b', '', t)
-    for opener in (r'\\hyperref\[[^\]]*\]', r'\\href\{[^}]*\}', r'\\textit', r'\\textbf', r'\\texttt',
+    for opener in (r'\\hyperref\[[^\]]*\]', r'\\href\{[^}]*\}', r'\\emph', r'\\textit', r'\\textbf', r'\\texttt',
                    r'\\caption', r'\\(?:sub)*section'):
         t = unwrap(t, opener)
     return tokens(unwrap(t, r'\\footnote', ' FOOT ', ' ENDFOOT '))
