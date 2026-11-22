@@ -5,4 +5,4 @@
 # notebook was checked with. Move the pin when the notebook is copied again from the book: the newest
 # release is the last line of https://intertemporal-choice.github.io/packages/releases.txt, which also
 # gives the sha256 that pip checks here. Never the bare name: it is unclaimed on PyPI.
-intertemporal-choice @ https://intertemporal-choice.github.io/packages/intertemporal_choice-2026.11.16.4-py3-none-any.whl#sha256=9c65ce003afdc0445bf0e19697f220cab54c781788aec9f518857931efd7e7a0
+intertemporal-choice @ https://intertemporal-choice.github.io/packages/intertemporal_choice-2026.11.22.3-py3-none-any.whl#sha256=5e8e0dc037a1611006d8a28c12e3a3f0874e79d09a4342c924e5a079683e2bbc
