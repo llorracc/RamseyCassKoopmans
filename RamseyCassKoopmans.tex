@@ -79,11 +79,14 @@ A first candidate for the best steady state is the one with the highest $\cNrm$.
 \begin{equation*}
   \frac{d\cNrm}{d\kNrm} = \fFunc^{\prime}(\kNrm) - (\PtyGroRte +\PopnGroRte+\deprRte) = 0 ,
 \end{equation*}
-and since $d^{2}\cNrm/d\kNrm^{2} = \fFunc^{\prime\prime}(\kNrm) < 0$, this is a maximum. The capital stock that satisfies it, $\GoldRule{\kNrm}$, obeys the ``golden rule'' of \citet{phelps:golden}, an article well worth reading:
+and since $d^{2}\cNrm/d\kNrm^{2} = \fFunc^{\prime\prime}(\kNrm) < 0$, this is a maximum. The capital stock that satisfies it, $\GoldRule{\kNrm}$, obeys the ``golden rule'' of \citet{phelps:golden}:\marginFootnote{Phelps called it the ``golden rule'' on the grounds that every generation does unto its successors what it would want its ancestors to have done unto it. You might worry that the argument doesn't make sense, because what is really being equalized across generations is consumption per efficiency unit of labor, and no extant texts of the Christian New Testament quote Jesus as having said ``do unto other efficiency units of labor as you, an efficiency unit of labor yourself, would have liked the ancestral efficiency units to have done unto you.'' Keep reading.}
 \begin{equation}
   \fFunc^{\prime}(\GoldRule{\kNrm}) = \PtyGroRte +\PopnGroRte+\deprRte . \label{eq:RCK-goldenRule}
 \end{equation}
-One more unit of $\kNrm$ adds $\fFunc^{\prime}(\kNrm)$ to output, but holding it steady as effective labor grows and capital depreciates takes $\PtyGroRte +\PopnGroRte+\deprRte$ more investment; consumption is highest where the two are equal. With the Cobb-Douglas $\fFunc(\kNrm) = \kNrm^{\kapShare}$, the golden rule is $\GoldRule{\kNrm} = \left(\kapShare/(\PtyGroRte +\PopnGroRte+\deprRte)\right)^{1/(1-\kapShare)}$.
+One more unit of $\kNrm$ adds $\fFunc^{\prime}(\kNrm)$ to output, but holding it steady as effective labor grows and capital depreciates takes $\PtyGroRte +\PopnGroRte+\deprRte$ more investment; consumption is highest where the two are equal. With the Cobb-Douglas $\fFunc(\kNrm) = \kNrm^{\kapShare}$, the golden rule is
+\begin{equation}
+  \GoldRule{\kNrm} = \left(\kapShare/(\PtyGroRte +\PopnGroRte+\deprRte)\right)^{1/(1-\kapShare)} . \label{eq:RCK-goldenRuleCobbDouglas}
+\end{equation}
 
 \section{The Social Planner's Problem}
 
