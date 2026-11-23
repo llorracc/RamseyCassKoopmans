@@ -460,7 +460,6 @@ dmypy.json
 # End of https://www.gitignore.io/api/latex,emacs,macos,python,ipython
 # Custom for CDC papers
 *.bibkey
-*.dep
 
 # economics.bib will be nonexistent on local machine, but should exist and be of zero size on remote
 # This requires it to exist but be empty on first commit, and ignored thereafter 
