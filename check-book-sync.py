@@ -117,6 +117,11 @@ RAW_ALLOWED = [
     (r'\\tau(?![A-Za-z])', 'the dummy of integration in the transversality condition'),
 ]
 
+# The section that translates other textbooks' notation writes their letters for their objects (Romer's
+# rho, Acemoglu's c-tilde). Rule D is about this handout's own objects, so the raw-letter check skips that
+# section, from its label to the next \section or the bibliography.
+OTHER_NOTATION_SECTION = 'sec:RCK-notationCrosswalk'
+
 # Letters the book's chapter still writes raw, where the handout writes the macro that prints the same
 # letter (rule D): (the book's raw letter, the handout's macro). Read only inside the book's math.
 # Empty since book #104 (a7abe20) wrote the chapter's raw c, k and \lambda as \cNrm, \kap and \vk.
@@ -473,6 +478,13 @@ def check_raw_letters(plain, problems):
     the contents of equation environments and of $...$. Returns how many letters each entry explained."""
     start = plain.index('\\begin{document}')
     body = plain[start:]
+    i = body.find('\\label{' + OTHER_NOTATION_SECTION + '}')
+    if i < 0:
+        problems.append(f'No longer needed: OTHER_NOTATION_SECTION ({OTHER_NOTATION_SECTION} is not in the handout)')
+    else:
+        ends = [j for j in (body.find('\\section', i), body.find('\\bibliographystyle', i)) if j >= 0]
+        j = min(ends) if ends else len(body)
+        body = body[:i] + re.sub(r'[^\n]', ' ', body[i:j]) + body[j:]  # blanked, keeping line numbers
     envs = re.compile(r'\\begin\{(equation\*?)\}(.*?)\\end\{\1\}', re.S)
     spans = [(m.start(2), m[2]) for m in envs.finditer(body)]
     outside = envs.sub(lambda m: ' ' * len(m[0]), body)
