@@ -239,8 +239,17 @@ def strip_label(x):
     return re.sub(r'^(?:eq|fig):(?:RCK-)?', '', x)
 
 
+def tabular_words(m):
+    """A tabular's cells, without its markup: the column spec, \\hline and the row ends."""
+    return re.sub(r'\\\\|\\hline', ' ', m[1])
+
+
 def handout_words(t):
     t = re.sub(COMMENT, '', t, flags=re.M)
+    t = re.sub(r'\\begin\{tabular\}\{[^}]*\}(.*?)\\end\{tabular\}', tabular_words, t, flags=re.S)
+    t = re.sub(r'\\(begin|end)\{center\}', '', t)
+    # Each document names itself: "this handout" here is "this chapter" in the book.
+    t = re.sub(r'\b([Tt]his) handout\b', r'\1 chapter', t)
     t = re.sub(r'\\(begin|end)\{itemize\}|\\item\b', '', t)
     t = re.sub(r'\\label\{[^}]*\}', '', t)
     t = re.sub(r'\\eqref\{([^}]*)\}', lambda m: 'EQ' + strip_label(m[1]), t)
@@ -286,6 +295,8 @@ def book_math(s, raw_used):
 def book_words(b, raw_used):
     """A page's words, already rewritten into the handout's macro names."""
     b = re.sub(r'^- ', '', b, flags=re.M)  # list items, which the handout writes as \item
+    b = re.sub(r'^\|[\s:|-]*\|\s*$', '', b, flags=re.M)  # a table's alignment row
+    b = re.sub(r'^\|.*\|\s*$', lambda m: m[0].replace('|', ' '), b, flags=re.M)  # its cells, as the handout's tabular
     footnotes = {}
 
     def keep(m):
