@@ -248,8 +248,9 @@ def handout_words(t):
     t = re.sub(COMMENT, '', t, flags=re.M)
     t = re.sub(r'\\begin\{tabular\}\{[^}]*\}(.*?)\\end\{tabular\}', tabular_words, t, flags=re.S)
     t = re.sub(r'\\(begin|end)\{center\}', '', t)
-    # Each document names itself: "this handout" here is "this chapter" in the book.
-    t = re.sub(r'\b([Tt]his) handout\b', r'\1 chapter', t)
+    # Each document names itself: "this handout" and "the handout's" here are "this chapter" and "the chapter's"
+    # in the book.
+    t = re.sub(r"\b([Tt]his|[Tt]he) handout('s)?\b", r'\1 chapter\2', t)
     t = re.sub(r'\\(begin|end)\{itemize\}|\\item\b', '', t)
     t = re.sub(r'\\label\{[^}]*\}', '', t)
     t = re.sub(r'\\eqref\{([^}]*)\}', lambda m: 'EQ' + strip_label(m[1]), t)
